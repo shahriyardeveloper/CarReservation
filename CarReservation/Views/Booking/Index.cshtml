@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Product View";
+
+    
+}
+@model ClaintFacingFormToUsers
+
+<p style="font:1.5em Arial,sans-serif">Welcome <b>@Model.User.FirstName</b> <b>@Model.User.LastName</b></p>
+
+<a class="btn btn-primary" asp-action="AddBooking" asp-controller="Booking">Add Booking</a> 
+
+<table class="table table-white">
+
+    @{
+
+        <tr>
+        <td>Name</td>
+        <td>Booking Date</td>
+        <td>Flexibility</td>
+        <td>Vehicle Size</td>
+        <td>Contact Number</td>
+        <td>Email Address</td>
+        <td>Created Date</td>
+        <td>Last Modifire Date</td>
+        </tr>
+        if (Model.User.IsAdmin == true)
+        {
+            for (int i = 0; i < Model.Client.Count; i++)
+            {
+                if (Model.Client[i].IsDeleted == false)
+                {
+                    if(Model.Client[i].Status == 1)
+                    {
+                        <tr>
+                            <td style="background:green">@Model.Client[i].Name </td>
+                            <td style="background:green" >@Model.Client[i].BookingDate.ToLongDateString()</td>
+                            <td style="background:green">@Model.Client[i].Flexibility</td>
+                            <td style="background:green">@Model.Client[i].VehicleSize</td>
+                            <td style="background:green">@Model.Client[i].ContactNumber</td>
+                            <td style="background:green">@Model.Client[i].EmailAddress</td>
+                            <td style="background:green">@Model.Client[i].CreatedDate.ToLongDateString()</td>
+                            <td style="background:green">@Model.Client[i].LastModifiedDate.ToLongDateString()</td>
+                            <td><a style="cursor:pointer" asp-action="DeleteBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td><a style="cursor:pointer" asp-action="UpdateBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                          <tr>
+                            <td>@Model.Client[i].Name </td>
+                            <td>@Model.Client[i].BookingDate.ToLongDateString()</td>
+                            <td>@Model.Client[i].Flexibility</td>
+                            <td>@Model.Client[i].VehicleSize</td>
+                            <td>@Model.Client[i].ContactNumber</td>
+                            <td>@Model.Client[i].EmailAddress</td>
+                            <td>@Model.Client[i].CreatedDate.ToLongDateString()</td>
+                            <td>@Model.Client[i].LastModifiedDate.ToLongDateString()</td>
+                            <td><a style="cursor:pointer" asp-action="DeleteBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td><a style="cursor:pointer" asp-action="UpdateBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                            <td><a style="cursor:pointer" asp-action="ComfirmBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa-solid fa-check"></i></a></td>
+                        </tr>
+                    }
+                }
+            }
+        }
+        else
+        {
+                for (int i = 0; i < Model.Client.Count; i++)
+                {
+                    if (Model.Client[i].IsDeleted == false)
+                    {
+                        if (Model.Client[i].Status == 1)
+                        {
+                            <tr>
+                                <td style="background:green">@Model.Client[i].Name </td>
+                                <td style="background:green">@Model.Client[i].BookingDate.ToLongDateString()</td>
+                                <td style="background:green">@Model.Client[i].Flexibility</td>
+                                <td style="background:green">@Model.Client[i].VehicleSize</td>
+                                <td style="background:green">@Model.Client[i].ContactNumber</td>
+                                <td style="background:green">@Model.Client[i].EmailAddress</td>
+                                <td style="background:green">@Model.Client[i].CreatedDate.ToLongDateString()</td>
+                                <td style="background:green">@Model.Client[i].LastModifiedDate.ToLongDateString()</td>
+                                <td><a style="cursor:pointer" asp-action="DeleteBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                <td><a style="cursor:pointer" asp-action="UpdateBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                            </tr>
+                        }
+                    else
+                    {
+                        <tr>
+                            <td>@Model.Client[i].Name </td>
+                            <td>@Model.Client[i].BookingDate.ToLongDateString()</td>
+                            <td>@Model.Client[i].Flexibility</td>
+                            <td>@Model.Client[i].VehicleSize</td>
+                            <td>@Model.Client[i].ContactNumber</td>
+                            <td>@Model.Client[i].EmailAddress</td>
+                            <td>@Model.Client[i].CreatedDate.ToLongDateString()</td>
+                            <td>@Model.Client[i].LastModifiedDate.ToLongDateString()</td>
+                            <td><a style="cursor:pointer" asp-action="DeleteBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td><a style="cursor:pointer" asp-action="UpdateBooking" asp-controller="Booking" asp-route-id="@Model.Client[i].Id"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                        </tr>
+                    }
+                    }
+                }
+        }
+    }
+</table>
